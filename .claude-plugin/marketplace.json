@@ -1,15 +1,15 @@
 {
   "name": "akapulu",
-  "description": "Official Akapulu agent skills — live avatar conversations and scripted clips, plus the docs MCP.",
+  "description": "Official Akapulu Labs agent skills — live avatar conversations and scripted clips, plus the docs MCP.",
   "owner": {
-    "name": "Akapulu",
+    "name": "Akapulu Labs",
     "email": "william@akapulu.com"
   },
   "plugins": [
     {
       "name": "akapulu",
-      "displayName": "Akapulu",
-      "description": "Skills for building on Akapulu: first hosted link, then embed, knowledge bases, and endpoints.",
+      "displayName": "Akapulu Labs",
+      "description": "Skills for building on Akapulu Labs: first hosted link, then embed, knowledge bases, and endpoints.",
       "source": "./",
       "category": "developer-tools",
       "skills": ["./skills/akapulu"]

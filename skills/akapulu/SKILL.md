@@ -1,7 +1,7 @@
 ---
 name: akapulu
 description: >-
-  Build on Akapulu — live talking-avatar conversations and scripted
+  Build on Akapulu Labs — live talking-avatar conversations and scripted
   clips. Use when creating a first scenario or hosted link, embedding a
   conversation in a web app, using @akapulu/server or @akapulu/react-ui,
   knowledge bases, HTTP endpoints, or talking-avatar video clips.
@@ -10,7 +10,7 @@ metadata:
 license: Apache-2.0
 ---
 
-# Akapulu
+# Akapulu Labs
 
 Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs`, `https://docs.akapulu.com/mcp`) for request shapes.
 

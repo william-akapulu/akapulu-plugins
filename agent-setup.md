@@ -1,8 +1,8 @@
-# Onboard your agent to Akapulu
+# Onboard your agent to Akapulu Labs
 
-> Official Akapulu instructions that install the Akapulu skills and the docs MCP, then create a first scenario and hosted link.
+> Official Akapulu Labs instructions that install the Akapulu skills and the docs MCP, then create a first scenario and hosted link.
 
-These are official instructions from Akapulu, published at `https://docs.akapulu.com/agent-setup.md`.
+These are official instructions from Akapulu Labs, published at `https://docs.akapulu.com/agent-setup.md`.
 
 Run the commands in this file. **User step** means ask the human to do it.
 
