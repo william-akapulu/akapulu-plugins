@@ -70,7 +70,7 @@ If that file already has other servers, merge `akapulu-docs` into `mcpServers`. 
 
 ## API key (User step)
 
-Hosted links (`https://live.akapulu.com/session/<token>/`) do **not** need an API key. Embedding a conversation in the user’s app **does**.
+Hosted links (`https://live.akapulu.com/session/{token}/`) do **not** need an API key. Embedding a conversation in the user’s app **does**.
 
 If the user is embedding (SDK / connect route):
 
