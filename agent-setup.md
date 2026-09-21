@@ -54,17 +54,13 @@ Add the docs MCP to `~/.cursor/mcp.json` (or this project's `.cursor/mcp.json`).
 
 ## 2. API key
 
-> **User step.** Open https://akapulu.com/api-keys and create a key. Then in **their terminal** they run:
->
-> ```
-> export AKAPULU_API_KEY=...
-> ```
->
-> They type the key in the shell. Do not ask them to paste it into this chat.
+> **User step.** Open https://akapulu.com/api-keys and create a key.
+
+The env var name is `AKAPULU_API_KEY`. Put it in this project however env vars are already loaded (`.env`, `.env.local`, host secrets, etc.). Do not ask them to paste the key into chat.
 
 Use that key only to create account resources (scenarios, hosted links, later knowledge bases and endpoints). Do not call `/api/conversations/connect/` or `/updates/` from this setup.
 
-Wait until `AKAPULU_API_KEY` is set in the shell you are using, then continue.
+Wait until `AKAPULU_API_KEY` is set, then continue.
 
 ## 3. First scenario and hosted link
 

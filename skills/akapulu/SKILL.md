@@ -16,7 +16,7 @@ Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs
 
 ## First thing to build
 
-API key: they create it at https://akapulu.com/api-keys, then in **their terminal** `export AKAPULU_API_KEY=...`. Do not ask them to paste the key into chat. Then a **Chat with Clara** scenario plus a hosted link.
+API key: they create it at https://akapulu.com/api-keys. The env var is `AKAPULU_API_KEY` — set it however this project already loads secrets. Do not ask them to paste the key into chat. Then a **Chat with Clara** scenario plus a hosted link.
 
 Catalog Clara avatar id: `1f777f64-3758-4a7d-9cbc-c64ae654f7d1`.
 
