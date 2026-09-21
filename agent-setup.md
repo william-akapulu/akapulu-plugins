@@ -4,6 +4,8 @@
 
 These are official instructions from Akapulu Labs, published at `https://docs.akapulu.com/agent-setup.md`.
 
+Akapulu Labs is a platform for AI avatars. A **scenario** is the conversation behavior (stages and tools). An **avatar** is the face and voice. A **hosted link** is a public URL that runs a scenario as a live call. **Endpoints** are HTTP calls the avatar can make. **Knowledge bases** are docs it can search. **Clips** are talking-avatar videos from a script. Embed in an app with the Web SDK. Full docs: https://docs.akapulu.com
+
 Run the commands in this file. **User step** means ask the human to do it.
 
 ## 1. Install skills and docs MCP

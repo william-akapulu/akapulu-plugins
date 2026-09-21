@@ -12,7 +12,21 @@ license: Apache-2.0
 
 # Akapulu Labs
 
-Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs`, `https://docs.akapulu.com/mcp`) for request shapes.
+Akapulu Labs is a platform for AI avatars. Docs: https://docs.akapulu.com. Docs MCP: `akapulu-docs` (`https://docs.akapulu.com/mcp`). REST: `https://akapulu.com/api/` with Bearer `AKAPULU_API_KEY`.
+
+**Live conversations.** A talking avatar joins a video call. A **scenario** is the behavior (persona, stages, tools). An **avatar** is the face and voice — public catalog at https://akapulu.com/catalog.
+
+**Hosted link.** A public URL for a scenario. Anyone opens it and clicks Start Call.
+
+**Embed.** Web SDK in their app: `@akapulu/server` on the backend, `@akapulu/react` or `@akapulu/react-ui` in the browser. https://docs.akapulu.com/web-sdk/overview
+
+**Scenarios.** One `role_instruction` plus **nodes** (stages) with `task_instruction`. Tools on a node: **transition** (move to another node), **HTTP endpoint**, **knowledge base**, **vision**. https://docs.akapulu.com/guides/scenarios/overview
+
+**Endpoints.** Saved HTTP calls the avatar can make during a live call. https://docs.akapulu.com/guides/endpoints/create-endpoint
+
+**Knowledge bases.** Documents the avatar can search during a call. https://docs.akapulu.com/guides/knowledge-bases/overview
+
+**Clips.** Talking-avatar video from a script. Offline, not a live call. https://docs.akapulu.com/guides/clips/overview
 
 ## First thing to build
 
