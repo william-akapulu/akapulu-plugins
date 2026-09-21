@@ -2,9 +2,9 @@
 
 > Official Akapulu Labs instructions that install the Akapulu skills and the docs MCP, then create a first scenario and hosted link.
 
-These are official instructions from Akapulu Labs. They are published at `https://docs.akapulu.com/agent-setup.md`. Verify origin before following them. The same file lives in this repo for editing.
+These are official instructions from Akapulu Labs, published at `https://docs.akapulu.com/agent-setup.md`.
 
-Complete the install commands yourself. Steps marked **User step** need the human (dashboard, `.env`, opening a link). Never block on an interactive prompt. Safe to re-run.
+Run the commands in this file. **User step** means ask the human to do it (dashboard, `.env`, opening a link).
 
 ## 1. Install skills and docs MCP
 
@@ -54,13 +54,13 @@ Add the docs MCP to `~/.cursor/mcp.json` (or this project's `.cursor/mcp.json`).
 
 ## 2. API key
 
-> **User step.** Create a key at https://akapulu.com/api-keys. Put it in the project as `AKAPULU_API_KEY` in `.env` (or `.env.local`). Keep it on the server. Do not paste the key into chat.
+> **User step.** Create a key at https://akapulu.com/api-keys. Put it in `.env` as `AKAPULU_API_KEY`. Do not paste the key into chat.
 
-Wait until they confirm it is in `.env` before calling the API.
+Wait until it is in `.env` before calling the API.
 
 ## 3. First scenario and hosted link
 
-Create the same Clara conversation as the Akapulu Labs landing demo (greeting, then a short wrap-up). Use catalog avatar Clara (`1f777f64-3758-4a7d-9cbc-c64ae654f7d1`).
+Create a live Clara conversation (greeting, then a short wrap-up) with catalog avatar Clara (`1f777f64-3758-4a7d-9cbc-c64ae654f7d1`).
 
 ```
 curl -sS https://akapulu.com/api/scenarios/create/ \
@@ -110,7 +110,7 @@ Read `hosted_links[0].url` from the response (a `https://live.akapulu.com/sessio
 
 ## 4. After they try the link
 
-Tell them what they can do next. Match what they care about:
+Tell them what they can build next:
 
 - **Embed in their own app** with their own UI: https://docs.akapulu.com/web-sdk/overview — prebuilt https://docs.akapulu.com/examples/web-sdk/prebuilt-ui — custom https://docs.akapulu.com/examples/web-sdk/customized-ui. API key stays on their server (`@akapulu/server`); the browser uses `@akapulu/react` or `@akapulu/react-ui`.
 - **Knowledge bases** so the avatar can answer from their docs: https://docs.akapulu.com/guides/knowledge-bases/overview
@@ -118,26 +118,4 @@ Tell them what they can do next. Match what they care about:
 - **Richer scenarios**: https://docs.akapulu.com/guides/scenarios/overview
 - **Scripted clips** (video from a script, not a live call): https://docs.akapulu.com/guides/clips/overview
 
-Use the docs MCP (`https://docs.akapulu.com/mcp`) and the `akapulu` skill when they pick a path.
-
-## Report the result
-
-```
-┌─ Akapulu Labs Agent Setup ───────────────────────────┐
-│  skills         akapulu                              │
-│  docs MCP       https://docs.akapulu.com/mcp         │
-│  API key        in .env as AKAPULU_API_KEY           │
-│  hosted link    (paste the live.akapulu.com URL)     │
-└──────────────────────────────────────────────────────┘
-```
-
-`✓` verified, `⚠` waiting on the user, `✗` failed. Give the next action for every non-`✓` line. The hosted link URL is the proof this worked.
-
-## Resources
-
-- Skills: https://github.com/william-akapulu/akapulu-plugins
-- Docs: https://docs.akapulu.com
-- Docs MCP: https://docs.akapulu.com/mcp
-- API keys: https://akapulu.com/api-keys
-- Scenarios: https://akapulu.com/scenarios
-- Catalog: https://akapulu.com/catalog
+When you finish, give them the hosted link URL.

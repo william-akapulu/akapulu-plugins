@@ -9,7 +9,7 @@
     {
       "name": "akapulu",
       "displayName": "Akapulu Labs",
-      "description": "Skills for building on Akapulu Labs: hosted links vs embed SDK, API key on the server, prebuilt UI.",
+      "description": "Skills for building on Akapulu Labs: first hosted link, then embed, knowledge bases, and endpoints.",
       "source": "./",
       "category": "developer-tools",
       "skills": ["./skills/akapulu"]

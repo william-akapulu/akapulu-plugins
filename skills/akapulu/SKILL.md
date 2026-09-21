@@ -17,7 +17,7 @@ Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs
 
 ## First thing to build
 
-If they just installed (see `agent-setup.md`): they need an API key in `.env` as `AKAPULU_API_KEY` (https://akapulu.com/api-keys), then a **Chat with Clara** scenario plus a hosted link, same greeting flow as the Akapulu landing demo.
+If they just installed: API key in `.env` as `AKAPULU_API_KEY` (https://akapulu.com/api-keys), then a **Chat with Clara** scenario plus a hosted link.
 
 Catalog Clara avatar id: `1f777f64-3758-4a7d-9cbc-c64ae654f7d1`.
 
