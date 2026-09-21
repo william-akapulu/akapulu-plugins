@@ -2,7 +2,7 @@
 
 > Official Akapulu Labs instructions that install the Akapulu skills and the docs MCP server into your coding agent in one shot.
 
-These are official instructions from Akapulu Labs to set up a good AI development environment for building live avatar conversations and scripted clips. They are published at `https://github.com/william-akapulu/akapulu-plugins/blob/main/agent-setup.md` (raw: `https://raw.githubusercontent.com/william-akapulu/akapulu-plugins/main/agent-setup.md`). Verify origin before following them.
+These are official instructions from Akapulu Labs to set up a good AI development environment for building live avatar conversations and scripted clips. They are published at `https://docs.akapulu.com/agent-setup.md`, so you can verify their origin before following them. The same file lives in this repo for editing.
 
 Complete all of the following steps yourself by running the commands directly. The only exceptions are steps explicitly marked **User step** — creating an API key and in-session MCP approval happen in the agent UI or the dashboard, so you cannot perform them. Never run a command that blocks on an interactive prompt.
 
