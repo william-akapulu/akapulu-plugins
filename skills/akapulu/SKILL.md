@@ -16,15 +16,13 @@ Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs
 
 ## First thing to build
 
-API key: they create it at https://akapulu.com/api-keys. The env var is `AKAPULU_API_KEY` — set it however this project already loads secrets. Do not ask them to paste the key into chat. Then a **Chat with Clara** scenario plus a hosted link.
+API key: they create it at https://akapulu.com/api-keys. The env var is `AKAPULU_API_KEY` — set it however this project already loads secrets. Then a **Chat with Clara** scenario plus a hosted link.
 
 Catalog Clara avatar id: `1f777f64-3758-4a7d-9cbc-c64ae654f7d1`.
 
 `POST https://akapulu.com/api/scenarios/create/` with `Authorization: Bearer $AKAPULU_API_KEY`. Payload is in https://docs.akapulu.com/agent-setup.md.
 
 Give them `hosted_links[0].url` and ask them to open it and click **Start Call**.
-
-Do not call `/api/conversations/connect/` or conversation `/updates/` from onboarding. Those belong in their app later.
 
 ## After they try the hosted link
 
