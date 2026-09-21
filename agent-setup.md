@@ -4,7 +4,7 @@
 
 These are official instructions from Akapulu Labs, published at `https://docs.akapulu.com/agent-setup.md`.
 
-Run the commands in this file. **User step** means ask the human to do it (dashboard, `.env`, opening a link).
+Run the commands in this file. **User step** means ask the human to do it.
 
 ## 1. Install skills and docs MCP
 
@@ -54,9 +54,11 @@ Add the docs MCP to `~/.cursor/mcp.json` (or this project's `.cursor/mcp.json`).
 
 ## 2. API key
 
-> **User step.** Create a key at https://akapulu.com/api-keys. Put it in `.env` as `AKAPULU_API_KEY`. Do not paste the key into chat.
+> **User step.** Create a key at https://akapulu.com/api-keys. They should make it available to this session as `AKAPULU_API_KEY` however they keep secrets (shell export, `.env`, host config — whatever they already use). Do not paste the key into chat.
 
-Wait until it is in `.env` before calling the API.
+Use that key only to create account resources (scenarios, hosted links, later knowledge bases and endpoints). Do not call `/api/conversations/connect/` or `/updates/` from this setup.
+
+Wait until `AKAPULU_API_KEY` is available in the environment you are using, then continue.
 
 ## 3. First scenario and hosted link
 
@@ -110,12 +112,14 @@ Read `hosted_links[0].url` from the response (a `https://live.akapulu.com/sessio
 
 ## 4. After they try the link
 
-Tell them what they can build next:
+Send them these docs:
 
-- **Embed in their own app** with their own UI: https://docs.akapulu.com/web-sdk/overview — prebuilt https://docs.akapulu.com/examples/web-sdk/prebuilt-ui — custom https://docs.akapulu.com/examples/web-sdk/customized-ui. API key stays on their server (`@akapulu/server`); the browser uses `@akapulu/react` or `@akapulu/react-ui`.
-- **Knowledge bases** so the avatar can answer from their docs: https://docs.akapulu.com/guides/knowledge-bases/overview
-- **HTTP endpoints** so the avatar can call their backend: https://docs.akapulu.com/guides/endpoints/create-endpoint
-- **Richer scenarios**: https://docs.akapulu.com/guides/scenarios/overview
-- **Scripted clips** (video from a script, not a live call): https://docs.akapulu.com/guides/clips/overview
+- Custom UI: https://docs.akapulu.com/examples/web-sdk/customized-ui
+- Web SDK: https://docs.akapulu.com/web-sdk/overview
+- Prebuilt UI: https://docs.akapulu.com/examples/web-sdk/prebuilt-ui
+- Knowledge bases: https://docs.akapulu.com/guides/knowledge-bases/overview
+- HTTP endpoints: https://docs.akapulu.com/guides/endpoints/create-endpoint
+- Scenarios: https://docs.akapulu.com/guides/scenarios/overview
+- Clips: https://docs.akapulu.com/guides/clips/overview
 
 When you finish, give them the hosted link URL.

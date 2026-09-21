@@ -10,7 +10,7 @@ Paste this into Cursor, Claude Code, or Codex:
 Set up Akapulu Labs for me: fetch https://docs.akapulu.com/agent-setup.md and follow it.
 ```
 
-That installs the `akapulu` skill and the [docs MCP](https://docs.akapulu.com/mcp). Your agent will ask you to add an API key, then create a Clara scenario and a hosted link you can try in the browser.
+That installs the `akapulu` skill and the [docs MCP](https://docs.akapulu.com/mcp). Your agent will ask for an API key, create a Clara hosted link you can try, then share docs for a custom UI and the rest of the product.
 
 ## For agents
 
