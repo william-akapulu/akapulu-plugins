@@ -1,7 +1,7 @@
 ---
 name: akapulu
 description: >-
-  Build on Akapulu Labs — live talking-avatar conversations and scripted
+  Build on Akapulu — live talking-avatar conversations and scripted
   clips. Use when creating a first scenario or hosted link, embedding a
   conversation in a web app, using @akapulu/server or @akapulu/react-ui,
   knowledge bases, HTTP endpoints, or talking-avatar video clips.
@@ -10,13 +10,13 @@ metadata:
 license: Apache-2.0
 ---
 
-# Akapulu Labs
+# Akapulu
 
 Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs`, `https://docs.akapulu.com/mcp`) for request shapes.
 
 ## First thing to build
 
-API key from https://akapulu.com/api-keys, available as `AKAPULU_API_KEY` however they keep secrets. Then a **Chat with Clara** scenario plus a hosted link.
+API key: they create it at https://akapulu.com/api-keys, then in **their terminal** `export AKAPULU_API_KEY=...`. Do not ask them to paste the key into chat. Then a **Chat with Clara** scenario plus a hosted link.
 
 Catalog Clara avatar id: `1f777f64-3758-4a7d-9cbc-c64ae654f7d1`.
 

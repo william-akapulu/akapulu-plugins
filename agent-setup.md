@@ -1,8 +1,8 @@
-# Onboard your agent to Akapulu Labs
+# Onboard your agent to Akapulu
 
-> Official Akapulu Labs instructions that install the Akapulu skills and the docs MCP, then create a first scenario and hosted link.
+> Official Akapulu instructions that install the Akapulu skills and the docs MCP, then create a first scenario and hosted link.
 
-These are official instructions from Akapulu Labs, published at `https://docs.akapulu.com/agent-setup.md`.
+These are official instructions from Akapulu, published at `https://docs.akapulu.com/agent-setup.md`.
 
 Run the commands in this file. **User step** means ask the human to do it.
 
@@ -54,11 +54,17 @@ Add the docs MCP to `~/.cursor/mcp.json` (or this project's `.cursor/mcp.json`).
 
 ## 2. API key
 
-> **User step.** Create a key at https://akapulu.com/api-keys. They should make it available to this session as `AKAPULU_API_KEY` however they keep secrets (shell export, `.env`, host config — whatever they already use). Do not paste the key into chat.
+> **User step.** Open https://akapulu.com/api-keys and create a key. Then in **their terminal** they run:
+>
+> ```
+> export AKAPULU_API_KEY=...
+> ```
+>
+> They type the key in the shell. Do not ask them to paste it into this chat.
 
 Use that key only to create account resources (scenarios, hosted links, later knowledge bases and endpoints). Do not call `/api/conversations/connect/` or `/updates/` from this setup.
 
-Wait until `AKAPULU_API_KEY` is available in the environment you are using, then continue.
+Wait until `AKAPULU_API_KEY` is set in the shell you are using, then continue.
 
 ## 3. First scenario and hosted link
 
