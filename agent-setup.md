@@ -1,20 +1,12 @@
 # Onboard your agent to Akapulu Labs
 
-> Official Akapulu Labs instructions that install the Akapulu skills and the docs MCP server into your coding agent in one shot.
+> Official Akapulu Labs instructions that install the Akapulu skills and the docs MCP, then create a first scenario and hosted link.
 
-These are official instructions from Akapulu Labs to set up a good AI development environment for building live avatar conversations and scripted clips. They are published at `https://docs.akapulu.com/agent-setup.md`, so you can verify their origin before following them. The same file lives in this repo for editing.
+These are official instructions from Akapulu Labs. They are published at `https://docs.akapulu.com/agent-setup.md`. Verify origin before following them. The same file lives in this repo for editing.
 
-Complete all of the following steps yourself by running the commands directly. The only exceptions are steps explicitly marked **User step** — creating an API key and in-session MCP approval happen in the agent UI or the dashboard, so you cannot perform them. Never run a command that blocks on an interactive prompt.
+Complete the install commands yourself. Steps marked **User step** need the human (dashboard, `.env`, opening a link). Never block on an interactive prompt. Safe to re-run.
 
-Every command below is safe to re-run on a machine where setup already happened.
-
-Do **not** stand up a hosted Akapulu account MCP or OAuth in this file. There is not one. The live plug for product knowledge is the **docs MCP**. Account actions use the customer’s **API key** on their server (REST + `@akapulu/server`), never in the browser and never pasted into chat.
-
----
-
-## Install Akapulu skills and docs MCP
-
-Every route installs the `akapulu` skill and wires the hosted docs MCP. Use the correct section for your agent below.
+## 1. Install skills and docs MCP
 
 ### Claude Code
 
@@ -22,13 +14,11 @@ Every route installs the `akapulu` skill and wires the hosted docs MCP. Use the 
 npx -y skills add william-akapulu/akapulu-plugins --skill '*' --yes --global
 ```
 
-Docs MCP:
-
 ```
 claude mcp add --transport http akapulu-docs -s user https://docs.akapulu.com/mcp
 ```
 
-> **User step.** Ask the user to reload plugins/skills if they do not appear, then confirm the `akapulu-docs` MCP shows as connected.
+> **User step.** Reload skills if they do not appear. Confirm `akapulu-docs` is connected.
 
 ### Codex
 
@@ -36,21 +26,19 @@ claude mcp add --transport http akapulu-docs -s user https://docs.akapulu.com/mc
 npx -y skills add william-akapulu/akapulu-plugins --skill '*' --yes --global
 ```
 
-Docs MCP:
-
 ```
 codex mcp add akapulu-docs --url https://docs.akapulu.com/mcp
 ```
 
-> **User step.** Ask the user to reload if prompted, then confirm the MCP is connected.
+> **User step.** Reload if prompted. Confirm the MCP is connected.
 
-### Cursor, GitHub Copilot, Windsurf, Cline, opencode, Gemini, and all other agents
+### Cursor and other agents
 
 ```
 npx -y skills add william-akapulu/akapulu-plugins --skill '*' --yes --global
 ```
 
-Docs MCP — add to `~/.cursor/mcp.json` (Cursor global) or `.cursor/mcp.json` (this project). Other clients: the equivalent MCP config file, same URL.
+Add the docs MCP to `~/.cursor/mcp.json` (or this project's `.cursor/mcp.json`). Merge into `mcpServers` if the file already exists:
 
 ```json
 {
@@ -62,57 +50,94 @@ Docs MCP — add to `~/.cursor/mcp.json` (Cursor global) or `.cursor/mcp.json` (
 }
 ```
 
-If that file already has other servers, merge `akapulu-docs` into `mcpServers`. Do not overwrite unrelated servers.
+> **User step.** Reload the agent. In Cursor, enable `akapulu-docs` under Settings → MCP.
 
-> **User step.** Ask the user to reload or restart the agent so skills and MCP load. In Cursor, enable `akapulu-docs` if it appears in Settings → MCP.
+## 2. API key
 
----
+> **User step.** Create a key at https://akapulu.com/api-keys. Put it in the project as `AKAPULU_API_KEY` in `.env` (or `.env.local`). Keep it on the server. Do not paste the key into chat.
 
-## API key (User step)
+Wait until they confirm it is in `.env` before calling the API.
 
-Hosted links (`https://live.akapulu.com/session/{token}/`) do **not** need an API key. Embedding a conversation in the user’s app **does**.
+## 3. First scenario and hosted link
 
-If the user is embedding (SDK / connect route):
+Create the same Clara conversation as the Akapulu Labs landing demo (greeting, then a short wrap-up). Use catalog avatar Clara (`1f777f64-3758-4a7d-9cbc-c64ae654f7d1`).
 
-1. They create a key at https://akapulu.com/api-keys (dashboard, logged in).
-2. They put it in **server** env (`AKAPULU_API_KEY` in `.env` / `.env.local` on the backend). Never in frontend code, never in chat.
-3. They need a **scenario** at https://akapulu.com/scenarios.
+```
+curl -sS https://akapulu.com/api/scenarios/create/ \
+  -H "Authorization: Bearer $AKAPULU_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @- <<'EOF'
+{
+  "name": "Chat with Clara",
+  "nodes_json": {
+    "initial_node": "greeting",
+    "role_instruction": "You are Clara, a friendly guide from Akapulu Labs. Speak in short natural sentences that will be read aloud. Do not use symbols, abbreviations, digits, URLs, markdown, or lists. Spell out any numbers as words. Keep each reply to one or two sentences. The visitor's first name is {{runtime.first_name}}. Use that first name only in the very first line of your first greeting, and only if it is not blank and you are confident how to pronounce it. If it is blank, unusual, or you are unsure of the pronunciation, skip the name. After that first line, never use their name again.",
+    "nodes": {
+      "greeting": {
+        "task_instruction": "Greet the visitor warmly and introduce yourself as Clara from Akapulu Labs. If you can use their first name, use it only in the first line of this first greeting, then never use it again. Ask what they want to build with Akapulu Labs. Keep replies brief. Ask follow-up questions about their use case and stay in this conversation. Do not call wrap_up after the first couple of replies. After about five of their replies, once you have a sense of what they want, call wrap_up.",
+        "respond_immediately": true,
+        "functions": [
+          {
+            "name": "wrap_up",
+            "type": "transition",
+            "description": "Move to the short closing message after about five visitor replies, once you have a sense of what they want to build. Do not call this after only one or two replies.",
+            "transition_to": "close"
+          }
+        ]
+      },
+      "close": {
+        "task_instruction": "Acknowledge what they just said in one short sentence. Then wrap up the call: say you have to end the call now, and if they want more conversations like this they can start building today or get in touch. End with a warm goodbye. Keep the whole reply to two or three short sentences.",
+        "respond_immediately": true,
+        "end_after_bot_response": true
+      }
+    }
+  },
+  "hosted_links": [
+    {
+      "avatar_id": "1f777f64-3758-4a7d-9cbc-c64ae654f7d1",
+      "label": "Chat with Clara",
+      "runtime_vars": { "first_name": "" },
+      "stt_keywords": ["Akapulu", "Akapulu Labs", "Clara"]
+    }
+  ]
+}
+EOF
+```
 
-Do not mint, guess, or paste a key yourself. Wait until they confirm the key is in server env before scaffolding a connect route.
+Read `hosted_links[0].url` from the response (a `https://live.akapulu.com/session/...` link).
 
-If they only want a hosted link: skip the key. Point them at the dashboard scenario + hosted link, then stop.
+> **User step.** Ask them to open that URL and click **Start Call**. That is a live talking-avatar conversation on their account.
 
----
+## 4. After they try the link
+
+Tell them what they can do next. Match what they care about:
+
+- **Embed in their own app** with their own UI: https://docs.akapulu.com/web-sdk/overview — prebuilt https://docs.akapulu.com/examples/web-sdk/prebuilt-ui — custom https://docs.akapulu.com/examples/web-sdk/customized-ui. API key stays on their server (`@akapulu/server`); the browser uses `@akapulu/react` or `@akapulu/react-ui`.
+- **Knowledge bases** so the avatar can answer from their docs: https://docs.akapulu.com/guides/knowledge-bases/overview
+- **HTTP endpoints** so the avatar can call their backend: https://docs.akapulu.com/guides/endpoints/create-endpoint
+- **Richer scenarios**: https://docs.akapulu.com/guides/scenarios/overview
+- **Scripted clips** (video from a script, not a live call): https://docs.akapulu.com/guides/clips/overview
+
+Use the docs MCP (`https://docs.akapulu.com/mcp`) and the `akapulu` skill when they pick a path.
 
 ## Report the result
-
-Report what you actually verified. Do not print a checkmark for anything you could not confirm.
 
 ```
 ┌─ Akapulu Labs Agent Setup ───────────────────────────┐
 │  skills         akapulu                              │
-│  akapulu-docs   https://docs.akapulu.com/mcp         │
-│  API key        server .env only (embed path)        │
-│                                                      │
-│  Reload or restart the agent to load the skills      │
+│  docs MCP       https://docs.akapulu.com/mcp         │
+│  API key        in .env as AKAPULU_API_KEY           │
+│  hosted link    (paste the live.akapulu.com URL)     │
 └──────────────────────────────────────────────────────┘
 ```
 
-Use `✓` verified, `⚠` needs a user action, `✗` failed. Follow the banner with the specific next action for every non-`✓` line.
-
-Once the docs MCP is connected, verify with a cheap read: search for conversation connect, or confirm OpenAPI includes `POST /api/conversations/connect/`. Empty or thin search hits still count if the tool ran.
-
-Do not install extra CLIs or SDKs in this file. After setup, the `akapulu` skill and the docs MCP are how you build (prebuilt UI, connect route, clips).
-
----
+`✓` verified, `⚠` waiting on the user, `✗` failed. Give the next action for every non-`✓` line. The hosted link URL is the proof this worked.
 
 ## Resources
 
-- This repo: https://github.com/william-akapulu/akapulu-plugins
+- Skills: https://github.com/william-akapulu/akapulu-plugins
 - Docs: https://docs.akapulu.com
 - Docs MCP: https://docs.akapulu.com/mcp
 - API keys: https://akapulu.com/api-keys
 - Scenarios: https://akapulu.com/scenarios
-- Prebuilt UI example: https://github.com/Akapulu/prebuilt-ui
-- Cursor MCP: https://cursor.com/docs/mcp
-- Claude Code MCP: https://docs.anthropic.com/en/docs/claude-code/mcp
+- Catalog: https://akapulu.com/catalog

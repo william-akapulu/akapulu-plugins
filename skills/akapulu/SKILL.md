@@ -2,9 +2,10 @@
 name: akapulu
 description: >-
   Build on Akapulu Labs — live talking-avatar conversations and scripted
-  clips. Use when embedding a conversation in a web app, creating a hosted
-  link, calling POST /api/conversations/connect/, using @akapulu/server or
-  @akapulu/react-ui, or generating talking-avatar video clips.
+  clips. Use when creating a first scenario or hosted link, embedding a
+  conversation in a web app, calling the connect API, using @akapulu/server
+  or @akapulu/react-ui, knowledge bases, HTTP endpoints, or talking-avatar
+  video clips.
 metadata:
   author: akapulu
 license: Apache-2.0
@@ -12,31 +13,34 @@ license: Apache-2.0
 
 # Akapulu Labs
 
-Start here for customer integrations. Prefer the **docs MCP** (`akapulu-docs`, `https://docs.akapulu.com/mcp`) and OpenAPI over memory. Do not invent scenario ids, avatar ids, or API keys.
+Live talking-avatar calls and scripted clips. Prefer the docs MCP (`akapulu-docs`, `https://docs.akapulu.com/mcp`) and OpenAPI for request shapes.
 
-## Two products (do not mix)
+## First thing to build
 
-| Path | What it is | API key? |
-| --- | --- | --- |
-| **Hosted link** | Share `https://live.akapulu.com/session/<token>/`. Visitor hits Akapulu’s page. Create the link in the dashboard on a scenario. | No |
-| **Embed in their app** | Their server calls connect; browser mounts `@akapulu/react` / `@akapulu/react-ui`. | Yes — **server only** (`AKAPULU_API_KEY`) |
+If they just installed (see `agent-setup.md`): they need an API key in `.env` as `AKAPULU_API_KEY` (https://akapulu.com/api-keys), then a **Chat with Clara** scenario plus a hosted link, same greeting flow as the Akapulu landing demo.
 
-If they only want a URL, stop after the dashboard hosted-link flow. Do not scaffold an SDK app.
+Catalog Clara avatar id: `1f777f64-3758-4a7d-9cbc-c64ae654f7d1`.
 
-## Embed path (golden)
+`POST https://akapulu.com/api/scenarios/create/` with `Authorization: Bearer $AKAPULU_API_KEY`:
 
-1. **User step:** key at https://akapulu.com/api-keys → `AKAPULU_API_KEY` in **backend** `.env`. Scenario at https://akapulu.com/scenarios. Never put the key in the client or in chat.
-2. Clone [prebuilt-ui](https://github.com/Akapulu/prebuilt-ui) (Express connect + Vite `AkapuluConversation`) unless they already have an app — then add a server connect route with `@akapulu/server` and the React UI in the browser.
-3. Docs: [Prebuilt UI](https://docs.akapulu.com/examples/web-sdk/prebuilt-ui), [connect](https://docs.akapulu.com/api-reference/conversations/connect). Confirm shapes with docs MCP / OpenAPI.
+- `name`: `Chat with Clara`
+- `nodes_json`: `initial_node` `greeting`; Clara role instruction (short spoken sentences, optional `{{runtime.first_name}}` only on the first line); greeting node asks what they want to build and `wrap_up` transitions to `close` after about five replies; `close` has `end_after_bot_response: true`
+- `hosted_links`: Clara `avatar_id`, `runtime_vars.first_name` `""`, `stt_keywords` `Akapulu`, `Akapulu Labs`, `Clara`
 
-`@akapulu/server` stays on the server. `@akapulu/react` / `@akapulu/react-ui` stay in the browser. Connect returns Daily room + token; the client does not call Akapulu with the secret key.
+Give them `hosted_links[0].url` and ask them to open it and click **Start Call**.
 
-## Source of truth
+Exact payload: `agent-setup.md` in this repo (also https://docs.akapulu.com/agent-setup.md).
 
-- Docs MCP search + filesystem (pages as `.mdx`, OpenAPI under `/openapi/`).
-- REST: `https://akapulu.com/api/` with `Authorization: Bearer <key>` for list/create scenarios, connect, updates, clips, knowledge bases. Avatars and billing are dashboard / session-auth today — do not pretend they are on the public API unless OpenAPI says so.
-- Never claim an endpoint cannot do something without checking OpenAPI or the docs MCP first.
+## After they try the hosted link
 
-## Clips
+Point them at what they want next:
 
-Scripted talking-avatar video is a separate API (`/api/clips/`). No Web SDK. See docs clips guides.
+- **Embed in their app** — [Web SDK](https://docs.akapulu.com/web-sdk/overview), [prebuilt UI](https://docs.akapulu.com/examples/web-sdk/prebuilt-ui), [customized UI](https://docs.akapulu.com/examples/web-sdk/customized-ui). `@akapulu/server` on the backend with `AKAPULU_API_KEY`; `@akapulu/react` / `@akapulu/react-ui` in the browser.
+- **Knowledge bases** — [guide](https://docs.akapulu.com/guides/knowledge-bases/overview)
+- **HTTP endpoints** — [guide](https://docs.akapulu.com/guides/endpoints/create-endpoint)
+- **More scenario stages / tools** — [scenarios](https://docs.akapulu.com/guides/scenarios/overview)
+- **Scripted clips** — [clips](https://docs.akapulu.com/guides/clips/overview)
+
+## API
+
+Base `https://akapulu.com/api/`. Bearer `AKAPULU_API_KEY`. Create scenarios (with `hosted_links` on the same request), connect, updates, clips, knowledge bases, endpoints. Confirm fields with OpenAPI via the docs MCP.

@@ -10,7 +10,7 @@ Paste this into Cursor, Claude Code, or Codex:
 Set up Akapulu Labs for me: fetch https://docs.akapulu.com/agent-setup.md and follow it.
 ```
 
-That installs the `akapulu` skill and the [docs MCP](https://docs.akapulu.com/mcp). You still create an API key in the dashboard if you are embedding a conversation in your app. Hosted links do not need a key.
+That installs the `akapulu` skill and the [docs MCP](https://docs.akapulu.com/mcp). Your agent will ask you to add an API key, then create a Clara scenario and a hosted link you can try in the browser.
 
 ## For agents
 
